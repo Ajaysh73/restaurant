@@ -7,8 +7,7 @@ const Footer = () => {
       <Link
         href='/'
         className='font-bold text-xl'>
-        {' '}
-        ANTONIO'S
+        ANTONIOS
       </Link>
       <p>© ALL RIGHTS RESERVED.</p>
     </div>
