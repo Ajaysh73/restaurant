@@ -1,10 +1,10 @@
 import { pizzas } from '@/data';
-import { Bubblegum_Sans } from 'next/font/google';
+import { MenuType } from '@/app/types/types';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 
-const CategoryPage = () => {
+const CategoryPage = async () => {
   return (
     <div className=' flex flex-wrap text-red-500'>
       {pizzas.map((item) => (
