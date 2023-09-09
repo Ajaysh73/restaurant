@@ -1,26 +1,43 @@
-import { featuredProducts } from '@/data';
+// import { featuredProducts } from '@/data';
+import { ProductType } from '@/app/types/types';
+import { getApiUrl } from '@/utils/apiUtils';
+// import { Product } from '@prisma/client';
 import Image from 'next/image';
 import React from 'react';
 
-const Featured = () => {
+const getData = async () => {
+  const apiUrl = getApiUrl(`/api/products`);
+  const res = await fetch(apiUrl, {
+    cache: 'no-store',
+  });
+  if (!res.ok) {
+    throw new Error('Failed!!');
+  }
+  return res.json();
+};
+
+const Featured = async () => {
+  const featuredProducts: ProductType[] = await getData();
   return (
     <div className='w-screen overflow-x-scroll text-red-500'>
       {/* WRAPPER */}
       <div className='w-max flex'>
         {/* SINGLE ITEM */}
-        {featuredProducts.map((item) => (
+        {featuredProducts.map((item: ProductType) => (
           <div
             key={item.id}
             className='w-screen h-[60vh] flex flex-col items-center justify-around p-4 hover:bg-fuchsia-50 transition-all duration-300 md:w-[50vw] xl:w-[33vw] xl:h-[90vh]'>
             {/* IMAGE CONTAINER */}
             {item.img && (
               <div className='relative flex-1 w-full hover:rotate-[60deg] transition-all duration-500'>
-                <Image
-                  src={item.img}
-                  alt=''
-                  fill
-                  className='object-contain'
-                />
+                {item.img && (
+                  <Image
+                    src={item.img}
+                    alt=''
+                    fill
+                    className='object-contain'
+                  />
+                )}
               </div>
             )}
             {/* TEXT CONTAINER */}
