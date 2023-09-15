@@ -28,7 +28,7 @@ export const useCartStore = create(
                   quantity: item.quantity + product.quantity,
                   price: item.price + product.price,
                 }
-              : item
+              : product
           );
           set((state) => ({
             products: updatedProducts,
@@ -49,6 +49,9 @@ export const useCartStore = create(
           totalItems: state.totalItems - item.quantity,
           totalPrice: Math.ceil((state.totalPrice - item.price) * 100) / 100,
         }));
+      },
+      reset: () => {
+        set(INITIAL_STATE);
       },
     }),
     { name: 'cart', skipHydration: true }

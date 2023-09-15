@@ -34,7 +34,7 @@ export default function RootLayout({
               <ToastContainer
                 position='bottom-right'
                 theme='dark'
-                autoClose={3000}
+                autoClose={2000}
               />
             </div>
           </QueryProvider>

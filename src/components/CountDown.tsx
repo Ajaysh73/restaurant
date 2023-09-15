@@ -2,30 +2,41 @@
 import React, { useState, useEffect } from 'react';
 
 const CountDown = () => {
-  let difference = +new Date(`10/10/2023`) - +new Date();
-  const [delay, setDelay] = useState(difference);
-
-  const d = Math.floor(difference / (1000 * 60 * 60 * 24));
-  const h = Math.floor((difference / (1000 * 60 * 60)) % 24);
-  const m = Math.floor((difference / 1000 / 60) % 60);
-  const s = Math.floor((difference / 1000) % 60);
+  const [delay, setDelay] = useState(0);
 
   useEffect(() => {
-    const timer = setInterval(() => {
-      setDelay(delay - 1);
-    }, 1000);
+    const endDate = new Date('10/10/2023');
+    const now = new Date();
+    const difference = endDate - now;
 
-    if (delay === 0) {
-      clearInterval(timer);
+    if (difference > 0) {
+      setDelay(difference);
+
+      const timer = setInterval(() => {
+        setDelay((prevDelay) => {
+          if (prevDelay > 1000) {
+            return prevDelay - 1000;
+          } else {
+            clearInterval(timer);
+            return 0;
+          }
+        });
+      }, 1000);
+
+      return () => {
+        clearInterval(timer);
+      };
     }
+  }, []);
 
-    return () => {
-      clearInterval(timer);
-    };
-  });
+  const days = Math.floor(delay / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((delay / (1000 * 60 * 60)) % 24);
+  const minutes = Math.floor((delay / (1000 * 60)) % 60);
+  const seconds = Math.floor((delay / 1000) % 60);
+
   return (
     <span className='font-bold text-5xl text-yellow-300'>
-      {d}:{h}:{m}:{s}
+      {days}:{hours}:{minutes}:{seconds}
     </span>
   );
 };
