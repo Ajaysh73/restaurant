@@ -24,7 +24,7 @@ const SuccessPage = () => {
     };
     makeRequest();
     reset();
-  }, [payment_intent, router]);
+  }, [payment_intent, router, reset]);
   return (
     <div>
       <div className=' min-h-[calc(100vh-6rem)] md:min-h-[calc(100vh-15rem)] flex items-center justify-center text-center text-2xl text-green-700'>

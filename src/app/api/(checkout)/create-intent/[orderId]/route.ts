@@ -1,6 +1,6 @@
 import { OrderType } from '@/app/types/types';
 import { prisma } from '@/utils/connect';
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse, NextRequest } from 'next/server';
 
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 export const POST = async (
@@ -15,7 +15,8 @@ export const POST = async (
   });
   console.log(order);
   if (order) {
-    const price = order.price;
+    const price = Number(order.price);
+    console.log(typeof price);
     if (typeof price === 'number') {
       const paymentIntent = await stripe.paymentIntents.create({
         amount: price * 100,

@@ -5,8 +5,8 @@ const CountDown = () => {
   const [delay, setDelay] = useState(0);
 
   useEffect(() => {
-    const endDate = new Date('10/10/2023');
-    const now = new Date();
+    const endDate = new Date('10/10/2023').getTime();
+    const now = new Date().getTime();
     const difference = endDate - now;
 
     if (difference > 0) {
