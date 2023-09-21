@@ -12,9 +12,11 @@ const Price = ({ product }: { product: ProductType }) => {
 
   useEffect(() => {
     if (product.options?.length) {
-      setTotal(
-        quantity * product.price + product.options[selected].additionalPrice
-      );
+      const newPrice: number = (
+        parseFloat(product.price.toString()) +
+        parseFloat(product.options[selected].additionalPrice.toString())
+      ).valueOf();
+      setTotal(quantity * newPrice);
     }
   }, [quantity, selected, product]);
   useEffect(() => {

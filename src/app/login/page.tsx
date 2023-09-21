@@ -25,6 +25,7 @@ const LoginPage = () => {
             alt=''
             fill
             className=' object-cover'
+            sizes='100%'
           />
         </div>
         {/* FORM CONTAINER */}
